@@ -7,7 +7,7 @@ VERIFY_TOKEN = os.getenv("IG_VERIFY_TOKEN", "verify_toufique_ig")
 
 @app.get("/")
 def root():
-    return {"status": "ok", "service": "ai-telegram-bot"}
+    return {"status": "ok", "service": "Ai-telegram-bot"}
 
 @app.get("/webhook/instagram")
 def verify(
