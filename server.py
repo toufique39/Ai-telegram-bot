@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from fastapi.responses import PlainTextResponse
 import os
 
 app = FastAPI()
@@ -10,17 +11,14 @@ def root():
     return {"status": "ok", "service": "Ai-telegram-bot"}
 
 @app.get("/webhook/instagram")
-def verify(
-    hub_mode: str = None,
-    hub_challenge: str = None,
-    hub_verify_token: str = None,
-):
-    if hub_mode == "subscribe" and hub_verify_token == VERIFY_TOKEN:
-        return int(hub_challenge)
-    return {"error": "verification failed"}
+async def verify_instagram(request: Request):
+    params = request.query_params
 
-@app.post("/webhook/instagram")
-async def webhook(request: Request):
-    data = await request.json()
-    print("IG Webhook:", data)
-    return {"status": "received"}
+    mode = params.get("hub.mode")
+    token = params.get("hub.verify_token")
+    challenge = params.get("hub.challenge")
+
+    if mode == "subscribe" and token == VERIFY_TOKEN:
+        return PlainTextResponse(challenge)
+
+    return PlainTextResponse("Verification failed", status_code=403)
