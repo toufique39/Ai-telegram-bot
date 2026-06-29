@@ -1,6 +1,6 @@
 import requests
 import os
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GROQ_API_KEY = os.getenv("xai-Rjcwj5RPqRVIXlOg3BaMEMbGJQcj1VK9qTLT0BVMKAzQu0FrPFrAix6U2MWi9cJNhHUk5kKKvgYy6Sf8")
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 MODEL_NAME = "llama-3.1-8b-instant"
 
